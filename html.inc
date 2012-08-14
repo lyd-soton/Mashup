@@ -25,7 +25,8 @@
     <?php } ?>
     <p>
       <pre>
-        <?php print_r($content); ?>
+	<?php print_r($content); ?>
+	<?php print_r($result); ?>
       </pre>
     </p>
 

@@ -19,6 +19,7 @@ class TwitterOAuth {
   public $url;
   /* Set up the API root URL. */
   public $host = "https://api.twitter.com/1/";
+  public $searchHost = "http://search.twitter.com/";
   /* Set timeout default. */
   public $timeout = 30;
   /* Set connect timeout. */
@@ -173,11 +174,25 @@ class TwitterOAuth {
   }
 
   /**
+   * SEARCH wrapper for oAuthRequest.
+   */
+  function search($parameters = array()) {
+    $response = $this->oAuthRequest('search', 'GET', $parameters, $this->searchHost);
+    if ($this->format === 'json' && $this->decode_json) {
+      return json_decode($response);
+    }
+    return $response;
+  }
+
+  /**
    * Format and sign an OAuth / API request
    */
-  function oAuthRequest($url, $method, $parameters) {
+  function oAuthRequest($url, $method, $parameters, $HOST = NULL) {
     if (strrpos($url, 'https://') !== 0 && strrpos($url, 'http://') !== 0) {
-      $url = "{$this->host}{$url}.{$this->format}";
+	if($HOST == NULL)      
+		$url = "{$this->host}{$url}.{$this->format}";
+	else
+		$url = "{$HOST}{$url}.{$this->format}";
     }
     $request = OAuthRequest::from_consumer_and_token($this->consumer, $this->token, $method, $url, $parameters);
     $request->sign_request($this->sha1_method, $this->consumer, $this->token);

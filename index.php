@@ -14,21 +14,17 @@ require_once('config.php');
 if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
     header('Location: ./clearsessions.php');
 }
-/* Get user access tokens out of the session. */
-$access_token = $_SESSION['access_token'];
 
-/* Create a TwitterOauth object with consumer/user tokens. */
-$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-
-/* If method is set change API call made. Test is called by default. */
-$content = $connection->get('account/verify_credentials');
-
-/* Some example calls */
-//$connection->get('users/show', array('screen_name' => 'abraham'));
-//$connection->post('statuses/update', array('status' => date(DATE_RFC822)));
-//$connection->post('statuses/destroy', array('id' => 5437877770));
-//$connection->post('friendships/create', array('id' => 9436992));
-//$connection->post('friendships/destroy', array('id' => 9436992));
-
+$content = '<a href="./showtweet.php">display lastest tweets</a>';
 /* Include HTML to display on the page */
+
+include ('./init_con.php');
+$searchQuery =  urlencode(utf8_encode("Olympic"));
+//$result = $connection->search(array('q' => $searchQuery, 'rpp' => '20', 'result_type' => 'recent'));//required 'q'
+//$connection->get('users/search', array('q' => $searchQuery));
+//$connection->get('users/suggestions/twitter', 'count' => '10');
+//$connection->get('trends/1');
+//$connection->get('statuses/user_timeline', array('user_id' => $userid));
+$result = $connection->get('statuses/home_timeline',array('include_entities' => 'true'));
 include('html.inc');
+?>
