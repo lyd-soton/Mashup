@@ -1,0 +1,42 @@
+<html>
+    <head>
+      <title>My Great Website</title>
+<script src="http://connect.facebook.net/en_US/all.js">
+      </script>
+      <script>
+	function postStatus()
+	{
+         FB.init({ 
+            appId:'406070982763241', cookie:true, 
+            status:true, xfbml:true 
+         });
+
+         FB.ui({ method: 'feed'});
+	}
+</script>
+<script type="text/javascript" src="Clipboard.js"></script>
+<script language="JavaScript">
+  var clip = null;  
+  function $(id) { return document.getElementById(id); }  
+  function init(msg) {
+  	clip = new ZeroClipboard.Client();
+  	clip.setHandCursor(true);  	
+  	clip.addEventListener('mouseOver', function (client) {
+    // update the text on mouse over
+    clip.setText(msg);
+  	});
+  	
+  	clip.addEventListener('complete', function (client, text) {
+    //debugstr("Copied text to clipboard: " + text );
+    alert("Tweet has just been copy to clipboard!");
+  	});
+
+  	clip.glue('clip_button', 'clip_container' );
+  }
+</script>
+</head>
+<body onload="init('kaka')">
+      <div id="fb-root"></div>
+      <a style="text-decoration:none;" href="javascript:postStatus()"><span id="clip_container"><span id="clip_button">post to facebook</span></span></a>
+     </body>
+ </html> 

@@ -9,9 +9,9 @@ function initialize() {
 	navigator.geolocation.getCurrentPosition(function(position) {
 	latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 	if(typeof position.address != 'undefined'){
-		location=location+'<div style="font-size:20"><b>Your Position Is:</b> '+position.address+'<br />Last Tweet: '+tweet+'</div>';
+		location=location+'<div style="font-size:12pt"><b>Your Position Is:</b> '+position.address+'<br />Last Tweet: '+tweet+'</div>';
 	}else{
-		location=location+'<div style="font-size:20pt;font-family:"Times New Roman",Times,serif;">Latitude: '+position.coords.latitude+'<br />Longitude: '+position.coords.longitude +'</div>';			
+		location=location+'<div style="font-size:12pt;font-family:"Times New Roman",Times,serif;">Latitude: '+position.coords.latitude+'<br />Longitude: '+position.coords.longitude +'</div>';			
 	}
 
 	var myOptions ={
@@ -26,7 +26,8 @@ function initialize() {
 		map : map
 	}); 
 	var infowindow = new google.maps.InfoWindow({ 
-		content : location
+		content : location,
+		maxWidth : 200
 	}); 
 	
 	infowindow.open(map,marker);

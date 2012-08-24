@@ -15,7 +15,11 @@ if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_t
     header('Location: ./clearsessions.php');
 }
 
-$content = '<a href="./showtweet.php">display lastest tweets</a>';
+$content = '<ul>
+	<li><a href="./showtweet.php">display lastest tweets</a></li>
+	<li><a href="./search.html">search tweets</a></li>
+	<li><a href="./recommend.html">recommend tweets</a></li>
+	</ul>';
 /* Include HTML to display on the page */
 
 include ('./init_con.php');
@@ -25,6 +29,5 @@ $searchQuery =  urlencode(utf8_encode("Olympic"));
 //$connection->get('users/suggestions/twitter', 'count' => '10');
 //$connection->get('trends/1');
 //$connection->get('statuses/user_timeline', array('user_id' => $userid));
-$result = $connection->get('statuses/home_timeline',array('include_entities' => 'true'));
 include('html.inc');
 ?>

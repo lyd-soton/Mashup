@@ -24,5 +24,32 @@ $position = "shanghai";
 </body>
 </html>
 
-<!--; <?php echo $position; ?>
+<!--; 
+<html>
+<head>
+<title>Search Page</title>
+<script type="text/javascript">
+function search()
+{
+var name = document.getElementById("name");
+var key = document.getElementById("key");
+window.location.href="search.php?screen_name="+name+"&key_words="+key;
+}
+</script>
+</head>
+
+<body>
+<h2>Search Page</h2>
+<hr />
+<br />
+
+Key Words:   <input type="text" id="key" name="key_words" />
+<br /><br /><br />
+Screen Name: <input type="text" id="name" name="screen_name" />
+<br /><br />
+
+<input type="button" onclick="search()" value="Search"/>
+
+</body>
+</html>
 -->
