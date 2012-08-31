@@ -2,7 +2,6 @@
 include ('./init_con.php');
 
 $tweet = $_GET['id'];
-$location = $_GET['location'];
 
 $origin = $connection->get('statuses/show/'.$tweet);
 $id = isset($origin->retweeted_status)?$origin->retweeted_status->id_str:$origin->id_str;
@@ -34,6 +33,25 @@ else
   html { height: 100% }
   body { height: 100%; margin: 0px; padding: 0px }
   #map_canvas { font-family:"Times New Roman",Times,serif; font-size:30px }
+  #clip_button {
+                width:150px; 
+                text-align:center; 
+                border:1px solid black; 
+                background-color:#ccc; 
+        }
+  #clip_button.hover { background-color:#eee; }
+  #clip_button.active { background-color:#aaa; }
+  
+a:link,a:visited,a:active,a:hover
+	{
+		font-size:15px;
+		font-weight:bold;
+		color:#2B472B;
+		text-align:center;
+		text-decoration:none;
+	}
+	
+	
 </style>
 <script src="http://connect.facebook.net/en_US/all.js">
       </script>
@@ -50,22 +68,18 @@ else
 </script>
 <script type="text/javascript" src="Clipboard.js"></script>
 <script language="JavaScript">
-  var clip = null;  
-  function $(id) { return document.getElementById(id); }  
   function init(msg) {
-  	clip = new ZeroClipboard.Client();
-  	clip.setHandCursor(true);  	
-  	clip.addEventListener('mouseOver', function (client) {
-    // update the text on mouse over
+  	var clip = new ZeroClipboard.Client();
+  	clip.addEventListener('onMouseDown', function (client) {
     clip.setText(msg);
   	});
   	
-  	clip.addEventListener('complete', function (client, text) {
-    //debugstr("Copied text to clipboard: " + text );
-    alert("Tweet has just been copy to clipboard!");
+  	clip.addEventListener('onComplete', function (client) {
+    	alert("Tweet has just been copy to clipboard!");
   	});
 
   	clip.glue('clip_button', 'clip_container' );
+	//clip.destroy().setTimeout('2000');
   }
 </script>
 <script type="text/javascript"
@@ -73,10 +87,10 @@ else
 </script>
 <script type="text/javascript" src="userlocation.js"></script>
 </head>
-<body onload="initialize('<?php echo $location ?>');init('<?php echo $content->retweeted_status->text ?>')">
+<body onload="initialize('<?php echo $content->retweeted_status->user->location; ?>');init('<?php echo $content->retweeted_status->text; ?>')">
   <div id="personInfo" style="position:absolute; left:0px; width:59%; height:100%">
   <p>Result: <?php echo $result ?><span style="position:absolute; right:0px"><a href="destroy.php?id=<?php echo $content->id_str; ?>">unRetweeted</a></span></p>
-  <p>location: <?php echo $location ?><span style="position:absolute; right:0px"><a href="javascript:history.go(-1)">Return</a>&nbsp;<a href="index.php">HomePage</a></span></p>
+  <p>location: <?php echo $content->retweeted_status->user->location; ?><span style="position:absolute; right:0px"><a href="javascript:history.go(-1)">Return</a>&nbsp;<a href="index.php">HomePage</a></span></p>
 <div id="fb-root"></div>
 <?php 
 if(!isset($content->errors))
@@ -86,22 +100,20 @@ if(!isset($content->errors))
   <hr />
   <p>Retweet details:<p><br />
   <p>
-	<pre>
-	<?php print_r($content); ?>
-  	</pre>
-<!--  <ul type="disc">
-  <li>ID: <?php echo $content->id; ?></li>
-  <li>Screen Name: <?php echo $content->screen_name; ?></li>
-  <li>Name: <?php echo $content->name; ?></li>
-  <li>Description: <?php echo $content->description; ?></li>
-  <li>Location: <?php echo $content->location; ?></li>
-  <li>Created Time: <?php echo $content->created_at; ?></li>
-  <li>Statuses Count: <?php echo $content->statuses_count; ?></li>
-  <li>Followers Count: <?php echo $content->follower_count; ?></li>
-  <li><a href="<?php echo $content->url; ?>">HomePage</a></li>
-  <li>Profile image: <image src="<?php echo $content->profile_image_url; ?>"></li>
+<?php 
+	if(isset($content->errors))
+		echo '<p><h3>No result!</h3></p>';
+	else
+	{
+?>
+  <ul type="disc">
+  <li>Profile image: <image src="<?php echo $content->retweeted_status->user->profile_image_url; ?>"></li>
+  <li>Name: <?php echo $content->retweeted_status->user->name; ?></li>  
+  <li>Post Time: <?php echo $content->retweeted_status->created_at; ?></li>
+  <li>Retweet Count: <?php echo $content->retweeted_status->retweet_count; ?></li>
+  <li>Tweet: <?php echo $content->retweeted_status->text; ?></li>
   </ul>  
--->  
+<?php } ?>
   </p>
   </div>
   <div id="map_canvas" style="position:absolute; right:0px; width:40%; height:100%"></div>

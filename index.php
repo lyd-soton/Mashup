@@ -18,11 +18,11 @@ if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_t
 $content = '<ul>
 	<li><a href="./showtweet.php">display lastest tweets</a></li>
 	<li><a href="./search.html">search tweets</a></li>
-	<li><a href="./recommend.html">recommend tweets</a></li>
+	<li><a href="./recommend.php">recommend tweets</a></li>
 	</ul>';
 /* Include HTML to display on the page */
 
-include ('./init_con.php');
+
 $searchQuery =  urlencode(utf8_encode("Olympic"));
 //$result = $connection->search(array('q' => $searchQuery, 'rpp' => '20', 'result_type' => 'recent'));//required 'q'
 //$connection->get('users/search', array('q' => $searchQuery));

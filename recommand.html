@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Totem Ticker</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.totemticker.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#tweetlist').totemticker({
+				next		:	'#next',
+				previous	:	'#previous',
+				stop		:	'#stop',
+				start		:	'#start',
+				mousestop	:	true,
+			});
+		});
+	</script>
+	
+</head>
+<body>
+	
+	
+	<div id="wrapper">	
+		<ul id="tweetlist">
+			<li><a href = "http://www.google.com"><div class="info"><img src="./images/totem-logo.png" />One Time</div></a></li>
+			<li>Baby</li>
+			<li>One Less Lonely Girl</li>
+			<li>Somebody to Love</li>
+			<li>Eenie Meenie</li>
+			<li>Never Say Never</li>
+			<li>U Smile</li>
+		</ul>
+		
+	</div>
+	<div style="position:absolute; left:600px; top:20%" id="control">
+	<input type="button" class="btn" href="#" id="start" value="Start" /><br /><br /><br />
+	<input type="button" class="btn" href="#" id="previous" value="Previous" /><br /><br /><br />
+	<input type="button" class="btn" href="#" id="next" value="Next" /><br /><br /><br />
+	<input type="button" class="btn" href="#" id="stop" value="Stop" />
+	<div>
+	
+	
+</body>	
+</html>

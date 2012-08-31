@@ -25,6 +25,18 @@ echo '<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <h2>Show Tweets</h2>
+<style type="text/css">
+a:link,a:visited,a:active,a:hover
+	{
+		font-size:15px;
+		font-weight:bold;
+		color:#2B472B;
+		text-align:center;
+		text-decoration:none;
+	}
+	
+	
+</style>
 </head>
 <title>Tweets</title>
 <body><p><a href="index.php">HomePage</a>&nbsp;<a href="javascript:history.go(-1)">Return</a><span style="position:absolute;right:0px">OrderBy&nbsp;<a href="showtweet.php?orderBy=tweet">Tweet ID</a>, <a href="showtweet.php?orderBy=retweets">Retweeted Times</a>, <a href="showtweet.php?orderBy=followers">User\'s Followers</a></span></p><hr />';

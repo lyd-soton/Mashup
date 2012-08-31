@@ -24,7 +24,7 @@ else if ($keywords!=NULL)
 	$type = isset($_GET['type'])?$_GET['type']:"recent";
 	
 	$searchQuery =  urlencode(utf8_encode($keywords));
-	$contents = $connection->search(array('q' => $searchQuery, 'rpp' => '20', 'result_type' => $type, 'lang' => 'en'));
+	$contents = $connection->search(array('q' => $searchQuery, 'rpp' => '10', 'result_type' => $type, 'lang' => 'en'));
 	foreach($contents->results as $content)
 	{
 	$info = $connection->get('users/show', array('screen_name' => $content->from_user, 'include_entities' => 'true'));

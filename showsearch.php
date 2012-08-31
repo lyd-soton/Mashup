@@ -44,10 +44,22 @@ else
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="refresh" content="120;url=search.php?sug=<?php echo $suggestions[rand(0,29)]->slug; ?>" />
 <h2>Search Results</h2>
 </head>
 <title>Search Results</title>
+<style type="text/css">
+a:link,a:visited,a:active,a:hover
+	{
+		font-size:15px;
+		font-weight:bold;
+		color:#2B472B;
+		text-align:center;
+		text-decoration:none;
+	}
+	
+	
+</style>
 <body>
 <?php echo $result; ?>
 <?php 

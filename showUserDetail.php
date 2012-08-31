@@ -2,7 +2,6 @@
 include ('./init_con.php');
 
 $screen_name = $_GET['name'];
-$location = $_GET['location'];
 
 $content = $connection->get('users/show', array('screen_name' => $screen_name, 'include_entities' => 'true'));
 ?>
@@ -15,13 +14,24 @@ $content = $connection->get('users/show', array('screen_name' => $screen_name, '
   html { height: 100% }
   body { height: 100%; margin: 0px; padding: 0px }
   #map_canvas { font-family:"Times New Roman",Times,serif; font-size:30px }
+a:link,a:visited,a:active,a:hover
+	{
+		font-size:15px;
+		font-weight:bold;
+		color:#2B472B;
+		text-align:center;
+		text-decoration:none;
+	}
+	
+	
+
 </style>
 <script type="text/javascript"
     src="https://maps.google.com/maps/api/js?sensor=false">
 </script>
 <script type="text/javascript" src="userlocation.js"></script>
 </head>
-<body onload="initialize('<?php echo $location; ?>','<?php echo $content->status->text; ?>')">
+<body onload="initialize('<?php echo $content->location; ?>','<?php echo $content->status->text; ?>')">
   <div id="personInfo" style="position:absolute; left:0px; width:59%; height:100%">
   <p><h2>Show User Detail</h2>
   <span style="position:absolute; right:0px"><a href="javascript:history.go(-1)">Return</a>&nbsp;<a href="index.php">HomePage</a></span></p>

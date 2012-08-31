@@ -166,7 +166,7 @@
   		stop		:	null,		/* ID of stop button or link */
   		start		:	null,		/* ID of start button or link */
   		row_height	:	'95px',	/* Height of each ticker row in PX. Should be uniform. */
-  		speed		:	800,		/* Speed of transition animation in milliseconds */
+  		speed		:	2000,		/* Speed of transition animation in milliseconds */
   		interval	:	1000,		/* Time between change in milliseconds */
 		max_items	: 	null, 		/* Integer for how many items to display at once. Resizes height accordingly (OPTIONAL) */
   };
