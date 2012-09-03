@@ -1,21 +1,22 @@
 <?php
 include ('./init_con.php');
 //$searchQuery =  urlencode(utf8_encode("Olympic"));
-$suggestions = $connection->get('users/suggestions');
-$suggestion = isset($_GET['sug'])?$_GET['sug']:$suggestions[rand(0,29)]->slug;
-$contents = $connection->get('users/suggestions/'.$suggestion,array('lang' => 'en'));
+
+$user = isset($_GET['user'])?$_GET['user']:'CrazyDoctor';
+if($user!=NULL)
+{
+$follower = $connection->get('followers/ids',array('cursor' => '-1', 'screen_name' => $user));
+$contents = $connection->get('users/lookup',array('user_id' => $follower->ids));
+}
 ?>
-
-
 <html>
 <head>
-<meta http-equiv="refresh" content="120;url=recommend.php?sug=<?php echo $suggestions[rand(0,29)]->slug; ?>">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Thumbnail scroller jQuery plugin</title>
 <link href="jquery.thumbnailScroller.css" rel="stylesheet" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script type="text/javascript" src="jquery-ui-1.8.13.custom.min.js"></script>
 <script type="text/javascript" src="jquery.thumbnailScroller.js"></script>
-<script type="text/javascript" src="animated-menu.js"></script>
 <script>
 (function($){
 window.onload=function(){ 
@@ -38,21 +39,25 @@ window.onload=function(){
 </script>
 </head>
 <body>
-<p><a href="index.php">HomePage</a></p>
-<div id="tS2" class="jThumbnailScroller" style="margin-top:150px;">
+<div id="tS2" class="jThumbnailScroller" style="margin-top:350px;">
 	<div class="jTscrollerContainer">
 		<div class="jTscroller">
-		<p>
-
-		<?php 
-foreach($contents->users as $user)
-{
-	echo '<span class="mlink"><a href = "showUserDetail.php?name='.$user->screen_name.'"><img src="'.$user->profile_image_url.'" align="center" title="'.$user->name.'"/></a></span>';
-}
+		<ul>
+<?php
+		foreach($contents as $content)
+		{
+			echo '<li>
+			<a href="followers.php?user='.$content->screen_name.'"><img src="'.$content->profile_image_url.'" />'.$content->name.'</a>
+			      </li>';
+		}
 ?>
-		</p>
+		</ul>
+
 		</div>
 	</div>
+</div>
+<div>
+<?php print_r($follower->ids); ?>
 </div>
 
 </body>

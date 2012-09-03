@@ -18,7 +18,8 @@ if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_t
 $content = '<ul>
 	<li><a href="./showtweet.php">display lastest tweets</a></li>
 	<li><a href="./search.html">search tweets</a></li>
-	<li><a href="./recommend.php">recommend tweets</a></li>
+	<li><a href="./recommendtweet.php">recommend tweets</a></li>
+	<li><a href="./recommend.php">recommend twitters</a></li>
 	</ul>';
 /* Include HTML to display on the page */
 

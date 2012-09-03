@@ -23,7 +23,15 @@ $contents = $connection->search(array('q' => $trend, 'rpp' => '35', 'result_type
 			});
 		});
 	</script>
+<style type="text/css">
+a:link,a:visited,a:active,a:hover
+	{
+		color:#2B472B;
+		text-decoration:none;
+	}
 	
+	
+</style>
 </head>
 <body>
 <div id="wrapper">	
@@ -48,7 +56,7 @@ foreach($contents->results as $content)
 		<?php 
 		foreach($trends[0]->trends as $trd)
 		{
-			echo '<li><a href="recommend.php?trend='.$trd->query.'">'.$trd->name.'</a></li>';
+			echo '<li><a href="recommendtweet.php?trend='.$trd->query.'">'.$trd->name.'</a></li>';
 		}
 		?>
 	</ul>
